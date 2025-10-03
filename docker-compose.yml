@@ -4,12 +4,15 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./data:/reservas-app/data
+      - reservas_data:/reservas-app/data
       - ./templates:/reservas-app/templates 
     env_file:
       - .env
     networks:
       - reservas-net
+
+volumes:
+  reservas_data:
 
 networks:
   reservas-net:
