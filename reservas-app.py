@@ -64,7 +64,7 @@ def agregar():
 
 
     conn = sqlite3.connect(DATABASE)
-    conn.execute("INSERT INTO registros (rtc, nombre, fechaini, fechafin, scrum) VALUES (?, ?, ?, ?, ?, ?)", (rtc, nombre, fechaini, fechafin, scrum, estado))
+    conn.execute("INSERT INTO registros (rtc, nombre, fechaini, fechafin, scrum, estado) VALUES (?, ?, ?, ?, ?, ?)", (rtc, nombre, fechaini, fechafin, scrum, estado))
     conn.commit()
     conn.close()
 
