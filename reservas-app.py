@@ -12,23 +12,21 @@ LOGFILE_PATH = os.environ.get('LOGFILE_PATH', 'data/registro.log')
 APP_ENV = os.environ.get('APP_ENV', 'development')
 
 def init_db():
+    os.makedirs(os.path.dirname(DATABASE), exist_ok=True)
 
-    if os.path.exists(DATABASE):
-        os.remove(DATABASE)
-        print("Base de datos anterior eliminada.")
+    with sqlite3.connect(DATABASE) as conn:
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS registros (
+                rtc TEXT NOT NULL,
+                nombre TEXT NOT NULL,
+                fechaini DATE NOT NULL,
+                fechafin DATE NOT NULL,
+                scrum TEXT NOT NULL,
+                estado TEXT NOT NULL
+            );
+        ''')
+        print("Base de datos verificada o creada.")
 
-        with sqlite3.connect(DATABASE) as conn:
-            conn.execute('''
-                CREATE TABLE registros (
-                    rtc TEXT NOT NULL,
-                    nombre TEXT NOT NULL,
-                    fechaini DATE NOT NULL,
-                    fechafin DATE NOT NULL,
-                    scrum TEXT NOT NULL,
-                    estado TEXT NOT NULL
-                );
-            ''')
-            print("Base de datos creada.")
 
 
 #    if not os.path.exists(DATABASE):
